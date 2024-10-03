@@ -7,7 +7,6 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon src/index.js",
     "git": "git add . && git commit -m 'AUTO GIT' && git push"
-
   },
   "keywords": [],
   "author": "",
