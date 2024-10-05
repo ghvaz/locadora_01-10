@@ -1,6 +1,27 @@
 import movie from "../models/movie.js";
 
 export default {
+    alugado: async function (nome) {
+        let filme = await movie.find({name: nome}).exec();
+        console.log(filme);
+
+        filme[0].alugado = true;
+        console.log(filme);
+    },
+    buscar: async function (req) {
+        try {
+            let user = undefined 
+            user = await movie.find({ name: req.filme });
+            if ( user == undefined) {
+                return "Filme não encontrado"
+            } else {   
+                return user
+            }   
+        } catch (error) {
+            return error
+        }
+    },
+
     add: async function (req, res) {
         try {
             let filme = await movie.create(req.body);

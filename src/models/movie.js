@@ -25,9 +25,15 @@ const SchemaFilme = new bd.Schema({
 
     classificacao: {
         type: String,
-        enum:["livre", "+10", "+12", "+14", "+16", "+18"],
-        default: "+18"
+        enum:["+ 0", "+ 10", "+ 12", "+ 14", "+ 16", "+ 18"],
+        default: "+ 18"
+    },
+    
+    alugado: {
+        type: Boolean,
+        default: false
     }
+    
 })
 
 const Movie = bd.model("Movie", SchemaFilme);

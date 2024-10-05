@@ -13,7 +13,6 @@ User{
 
 
 import bd from "../config/BD.js";
-import idade from "../middleware/idade.js";
 
 const SchemaUser = bd.Schema({
     name:{

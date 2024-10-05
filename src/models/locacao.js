@@ -18,34 +18,43 @@ function valorFinal(dias) {
 
 const SchemaLocacao = new BD.Schema({
     locador: {
-        type: BD.Schema.Types.ObjectId,
+        type: BD.Schema.Types.Mixed,
         required: true,
         ref: "User"
     },
 
     filme:{
-        type: BD.Schema.Types.ObjectId,
+        type: BD.Schema.Types.Mixed,
         required: true,
         ref: "Movie"
     },
-
-    diaInicial: {
-        type: String,
-        default: () => {
-            let data = new Date().toISOString().split("T")[0];  
-            console.log(data);
-
-            return data
-        }
-    },
+    
     diasLocado: {
         type: Number,
         required: true
     },
 
+    diaInicial: {
+        type: String,
+        default: () => {
+            let data = new Date().toISOString().split("T")[0];
+            return data
+        }
+    },
+
     devolvido:{
         type: Boolean,
         default: false
+    },
+
+    diaDevolucao: {
+        type: String,
+        default: function () {
+            let data = new Date()
+            data.setDate(data.getDate() + this.diasLocado);
+            data = data.toISOString().split("T")[0];
+            return data
+        }
     },
 
     valorEmprestimo:{
