@@ -1,6 +1,19 @@
 import model from "../models/user.js";
 
 export default {
+    buscar: async function (req, res) {
+        try {
+            let user = await model.find({ email: req.params.email });
+            if (user.length == 0) {
+                return user
+            } else {
+                return "Usuario não encontrado"
+            }   
+        } catch (error) {
+            res.status(400).json(error);
+        }
+    },
+    
     list: async function (req, res) {
         try {
             let user = await model.find();
