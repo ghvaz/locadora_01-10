@@ -1,9 +1,8 @@
 import axios from "axios"
 
 const cep_endereco = (req, res, next) => {
-    console.log(req.body.addres.cep);
     
-    if((req.body.addres.cep) == "Não informado"){
+    if(!(req.body.addres)){
         next()
     }else{
         if (req.body.addres.cep.length == 8 && !isNaN(Number(req.body.addres.cep)) ) {

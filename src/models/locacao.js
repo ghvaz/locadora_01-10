@@ -8,25 +8,35 @@
 }
 */
 
+import { get } from "mongoose";
 import BD from "../config/BD.js";
+function valorFinal(dias) {
+    let valor = 3;
+    valor = valor * dias;
+    return valor
+}
 
 const SchemaLocacao = new BD.Schema({
     locador: {
-        type: Object,
+        type: BD.Schema.Types.ObjectId,
         required: true,
         ref: "User"
     },
 
     filme:{
-        type: Object,
+        type: BD.Schema.Types.ObjectId,
         required: true,
         ref: "Movie"
     },
 
     diaInicial: {
-        type: Date,
-        required: true,
-        default: Date.now
+        type: String,
+        default: () => {
+            let data = new Date().toISOString().split("T")[0];  
+            console.log(data);
+
+            return data
+        }
     },
     diasLocado: {
         type: Number,
@@ -36,8 +46,16 @@ const SchemaLocacao = new BD.Schema({
     devolvido:{
         type: Boolean,
         default: false
-    }
+    },
 
+    valorEmprestimo:{
+        type: Number,
+        default: function () {
+            let valor = 2.5;
+            valor = valor * this.diasLocado;
+            return valor
+        }
+    }
 })
 
 const Locacao = BD.model("Locacao", SchemaLocacao)

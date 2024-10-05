@@ -16,11 +16,11 @@ const transformateData = function (req, res, next) {
         });
         //console.log(resultado);
         if (resultado[2] >= 0 && resultado[1] >= 0 && resultado[0] <= 0){
-            req.body.birthday_date = (resultado[2]) + " anos"
+            req.body.birthday_date = (resultado[2])
         }if (resultado[2] >= 0 && (resultado[1] < 0 || resultado[0] < 0) ){
-            req.body.birthday_date = (resultado[2] - 1) + " anos"
+            req.body.birthday_date = (resultado[2] - 1)
         }else{
-            req.body.birthday_date = resultado[2] + " anos"
+            req.body.birthday_date = resultado[2]
         }
     }
     next()
