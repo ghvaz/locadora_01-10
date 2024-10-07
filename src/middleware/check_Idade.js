@@ -1,28 +1,29 @@
 import user from "../controllers/user.js";
 import movie from "../controllers/movie.js";
 
+
 const checkIdade = async function (req, res, next) {
+    let pessoa =  await user.buscar(req.body);
+    let filme =  await movie.buscar(req.body); 
 
-    const id_F = req.body.locador;
-    const pessoa =  await user.buscar(req.body);
-    const filme =  await movie.buscar(req.body);   
-
+    if (pessoa == "Usuario não encontrado"){
+        res.status(400).json(pessoa);
+    } 
+    if(filme == "Filme não encontrado"){
+        res.status(400).json(filme);
+    }    
     if(filme[0].alugado == true){
-        res.status(400).json("Filme alugado");
-        }else if(typeof pessoa == "object" && typeof filme == "object"){
-            let idade = parseInt(pessoa[0].birthday_date , 10)
-            let classificacao = parseInt(filme[0].classificacao.split(" ")[1], 10);
-            {
-                if(idade < classificacao){
-                    res.status(400).json("Filme não adequado para idade do locador");
-                }else{
-                    movie.alugado(filme[0].name);
-                    next();
-                }
-            }
-        }else{
-            res.status(400).json("Filme ou Locador não encontrado");
-        }
+        res.status(400).json("Filme já alugado");
+    }
+
+    let idade = parseInt(pessoa[0].birthday_date , 10)
+    let classificacao = parseInt(filme[0].classificacao.split(" "), 10);
+    if(idade < classificacao){
+        res.status(400).json("Filme não adequado para idade do locador");
+    }else{
+        movie.alugar(filme[0]);
+        next();
+    }
     
 }
 export default checkIdade;

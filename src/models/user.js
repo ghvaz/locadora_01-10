@@ -21,6 +21,7 @@ const SchemaUser = bd.Schema({
     },
     birthday_date:{
         type: String,
+        required: true
     },
     
     email:{
@@ -38,6 +39,7 @@ const SchemaUser = bd.Schema({
     permission_type:{
         type: String,
         enum: ["user", "adm", "bal"],
+        default: "user"
     },
     phones:{
         type: String,

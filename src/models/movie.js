@@ -6,33 +6,25 @@ movie{
     classification [Livre, Maior16, Maior18]
 }
 */
+import { Schema } from "mongoose";
 import bd from "../config/BD.js";
 const SchemaFilme = new bd.Schema({
     name: {
         type: String,
-        required: true,
-    },
-
+        required: true },
     lancamento: {
         type: String,
-        required: true,
-    },
-
-    diretor: {
-        type: String,
-        default: "diretor não comentado",
-    },
-
+        required: true } ,
     classificacao: {
         type: String,
         enum:["+ 0", "+ 10", "+ 12", "+ 14", "+ 16", "+ 18"],
-        default: "+ 18"
-    },
-    
+        required: true },
+    diretor: {
+        type: String,
+        default: "diretor não comentado" },
     alugado: {
-        type: Boolean,
-        default: false
-    }
+        type: Schema.Types.Boolean,
+        default: false }
     
 })
 

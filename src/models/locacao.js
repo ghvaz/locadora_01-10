@@ -8,13 +8,9 @@
 }
 */
 
-import { get } from "mongoose";
+    
 import BD from "../config/BD.js";
-function valorFinal(dias) {
-    let valor = 3;
-    valor = valor * dias;
-    return valor
-}
+
 
 const SchemaLocacao = new BD.Schema({
     locador: {
@@ -59,6 +55,7 @@ const SchemaLocacao = new BD.Schema({
 
     valorEmprestimo:{
         type: Number,
+
         default: function () {
             let valor = 2.5;
             valor = valor * this.diasLocado;
@@ -68,4 +65,4 @@ const SchemaLocacao = new BD.Schema({
 })
 
 const Locacao = BD.model("Locacao", SchemaLocacao)
-export default Locacao
+export default Locacao 

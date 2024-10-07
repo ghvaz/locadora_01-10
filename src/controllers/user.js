@@ -4,7 +4,7 @@ export default {
     buscar: async function (req) {
         try {
             let user = await model.find({ email: req.locador });
-            if ( user == undefined) {
+            if ( user.length == 0) {
                 return "Usuario não encontrado"
             } else {   
                 return user
