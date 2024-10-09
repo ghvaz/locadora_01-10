@@ -7,4 +7,5 @@ rt.get("/" , locacao.list);
 rt.get("/:filme", locacao.show);
 rt.delete("/:filme", locacao.destroy);
 rt.put("/:filme", locacao.update);
+rt.put("/devolve", locacao.devolucao)
 export default rt;

@@ -8,6 +8,7 @@ export default {
     },
     buscar: async function (req) {
         try {
+            console.log(req);
             let user = await movie.find({ name: req.filme });            
             if ( user.length == 0) {
                 return "Filme não encontrado"
